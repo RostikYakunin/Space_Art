@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Art space</string>
+
+    //Image titles
+    <string name="park_title">Palm Jumeirah Park</string>
+    <string name="pool_title">Remraam Pool</string>
+    <string name="stadium_title">Remraam Stadium</string>
+    <string name="event_title">Shevchenko reading room</string>
+    <string name="beach_title">Aby Dabi`s beach</string>
+    <string name="mosque_title">Aby Dabi`s mosque</string>
+
+    //Image dates
+    <string name="park_date">11.03.2024</string>
+    <string name="pool_date">12.03.2024</string>
+    <string name="stadium_date">10.03.2024</string>
+    <string name="event_date">09.03.2024</string>
+    <string name="beach_date">08.03.2024</string>
+    <string name="mosque_date">08.03.2024</string>
+
+    //Buttons
+    <string name="button_prev">Previous</string>
+    <string name="button_next">Next</string>
+
+</resources>
