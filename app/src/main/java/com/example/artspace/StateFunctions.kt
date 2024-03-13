@@ -9,9 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 
 @Composable
-internal fun mutableStates(
-    state: Int = 1
-): MutableState<List<Int>> {
+internal fun mutableStates(state: Int = 1): MutableState<List<Int>> {
     return remember { mutableStateOf(listOf(state, state, state)) }
 }
 
