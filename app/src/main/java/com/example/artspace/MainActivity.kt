@@ -1,12 +1,13 @@
 package com.example.artspace
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.stringResource
@@ -48,22 +50,25 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ArtSpace() {
-    val tripleState = mutableStates()
+    val listMutableState = mutableStates()
 
-    val painterRes = choosePainter(tripleState.value[0])
-    val decsRes = chooseDescription(tripleState.value[1])
-    val dateRes = chooseDate(tripleState.value[2])
+    val painterRes = choosePainter(listMutableState.value[0])
+    val decsRes = chooseDescription(listMutableState.value[1])
+    val dateRes = chooseDate(listMutableState.value[2])
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFFEFBFF))
     ) {
 
         Wall(
             painter = painterRes,
-            modifier = Modifier.padding(bottom = 20.dp)
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+                .border(30.dp, Color(0xFFFEFBFF))
         )
 
         Description(
@@ -76,7 +81,7 @@ fun ArtSpace() {
         Controller(
             prevButtonText = stringResource(R.string.button_prev),
             nextButtonText = stringResource(R.string.button_next),
-            state = tripleState,
+            state = listMutableState,
             modifier = Modifier.padding(top = 20.dp)
         )
     }
@@ -87,13 +92,21 @@ private fun Wall(
     painter: Painter,
     modifier: Modifier = Modifier
 ) {
-    Image(
-        painter = painter,
-        contentDescription = null,
-        alignment = Alignment.Center,
+
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
-            .size(300.dp, 400.dp)
-    )
+            .padding(horizontal = 50.dp)
+            .shadow(20.dp)
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = null,
+            alignment = Alignment.Center,
+            modifier = modifier
+                .size(300.dp, 400.dp)
+        )
+    }
 }
 
 @Composable
@@ -138,7 +151,8 @@ fun Controller(
 
         Button(
             onClick = {
-                val nextState = if (state.value[0] != 1) state.value.map { it - 1 } else state.value.map { 6 }
+                val nextState =
+                    if (state.value[0] != 1) state.value.map { it - 1 } else state.value.map { 6 }
                 state.value = nextState
             }
         ) {
@@ -147,7 +161,8 @@ fun Controller(
 
         Button(
             onClick = {
-                val nextState = if (state.value[0] != 6) state.value.map { it + 1 } else state.value.map { 1 }
+                val nextState =
+                    if (state.value[0] != 6) state.value.map { it + 1 } else state.value.map { 1 }
                 state.value = nextState
             }
         ) {
